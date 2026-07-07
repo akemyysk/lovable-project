@@ -1,0 +1,1 @@
+ALTER TABLE public.events ADD COLUMN IF NOT EXISTS period TEXT CHECK (period IN ('morning','afternoon','evening'));
