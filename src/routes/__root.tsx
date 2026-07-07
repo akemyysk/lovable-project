@@ -11,7 +11,6 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import "../lib/fonts";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -102,13 +101,7 @@ function RootComponent() {
     const stored = localStorage.getItem("serenity-theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.classList.toggle("dark", stored ? stored === "dark" : prefersDark);
-    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
-      router.invalidate();
-      if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
-    });
-    return () => sub.subscription.unsubscribe();
-  }, [router, queryClient]);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

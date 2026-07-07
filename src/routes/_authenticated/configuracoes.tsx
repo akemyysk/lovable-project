@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { currentUserId } from "@/lib/queries";
 import { Card } from "@/components/ui/card";
@@ -8,8 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useNavigate } from "@tanstack/react-router";
-import { useQueryClient as useQC } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/_authenticated/configuracoes")({
   component: SettingsPage,
@@ -17,17 +15,13 @@ export const Route = createFileRoute("/_authenticated/configuracoes")({
 
 function SettingsPage() {
   const qc = useQueryClient();
-  const navigate = useNavigate();
   const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
 
-  const { data: profile } = useQuery({
+  useQuery({
     queryKey: ["profile"],
     queryFn: async () => {
-      const { data: u } = await supabase.auth.getUser();
-      if (!u.user) return null;
-      setEmail(u.user.email ?? "");
-      const { data } = await supabase.from("profiles").select("*").eq("id", u.user.id).maybeSingle();
+      const user_id = await currentUserId();
+      const { data } = await supabase.from("profiles").select("*").eq("id", user_id).maybeSingle();
       if (data) setDisplayName(data.display_name ?? "");
       return data;
     },
@@ -36,36 +30,29 @@ function SettingsPage() {
   const save = useMutation({
     mutationFn: async () => {
       const user_id = await currentUserId();
-      const { error } = await supabase.from("profiles").update({ display_name: displayName }).eq("id", user_id);
-      if (error) throw error;
+      const { data: existing } = await supabase.from("profiles").select("id").eq("id", user_id).maybeSingle();
+      if (existing) {
+        const { error } = await supabase.from("profiles").update({ display_name: displayName }).eq("id", user_id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from("profiles").insert({ id: user_id, display_name: displayName });
+        if (error) throw error;
+      }
     },
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["profile"] }); toast.success("Perfil atualizado"); },
   });
-
-  const signOut = async () => {
-    await qc.cancelQueries(); qc.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  };
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <h1 className="font-display text-3xl font-semibold">Configurações</h1>
 
       <Card className="card-surface p-6 space-y-4">
-        <h2 className="font-medium">Conta</h2>
-        <div className="space-y-2">
-          <Label>Email</Label>
-          <Input value={email} disabled />
-        </div>
+        <h2 className="font-medium">Perfil</h2>
         <div className="space-y-2">
           <Label>Nome de exibição</Label>
           <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
         </div>
-        <div className="flex gap-2">
-          <Button onClick={() => save.mutate()} disabled={save.isPending}>Salvar</Button>
-          <Button variant="outline" onClick={signOut}>Sair da conta</Button>
-        </div>
+        <Button onClick={() => save.mutate()} disabled={save.isPending}>Salvar</Button>
       </Card>
 
       <Card className="card-surface p-6">

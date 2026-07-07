@@ -47,10 +47,10 @@ const sb = supabase as unknown as {
   };
 };
 
+const ANON_USER_ID = "00000000-0000-0000-0000-000000000000";
+
 export async function currentUserId() {
-  const { data } = await supabase.auth.getUser();
-  if (!data.user) throw new Error("Not authenticated");
-  return data.user.id;
+  return ANON_USER_ID;
 }
 
 // TASKS

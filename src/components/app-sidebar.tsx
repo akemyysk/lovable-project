@@ -1,15 +1,13 @@
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import {
   LayoutDashboard, CalendarDays, Target, Heart,
-  Sparkles, TrendingUp, PiggyBank, Flower2, Settings, LogOut, Clock,
+  Sparkles, TrendingUp, PiggyBank, Flower2, Settings, Clock,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { supabase } from "@/integrations/supabase/client";
-import { useQueryClient } from "@tanstack/react-query";
 
 const mainItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -33,17 +31,7 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (r) => r.location.pathname });
-  const navigate = useNavigate();
-  const qc = useQueryClient();
-
   const isActive = (url: string) => pathname === url || pathname.startsWith(url + "/");
-
-  const signOut = async () => {
-    await qc.cancelQueries();
-    qc.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  };
 
   return (
     <Sidebar collapsible="icon" className="border-r">
@@ -119,11 +107,6 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Configurações" isActive={isActive("/configuracoes")}>
               <Link to="/configuracoes"><Settings /><span>Configurações</span></Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton onClick={signOut} tooltip="Sair">
-              <LogOut /><span>Sair</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

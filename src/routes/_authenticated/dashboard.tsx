@@ -11,7 +11,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Target, ImageIcon, Trophy, Calendar as CalendarIcon, ListChecks, Upload, X } from "lucide-react";
+import { Target, Image as ImageIcon, Trophy, Calendar as CalendarIcon, ListChecks, Upload, X } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -34,9 +34,8 @@ function Dashboard() {
   const { data: profile } = useQuery({
     queryKey: ["profile"],
     queryFn: async () => {
-      const { data: u } = await supabase.auth.getUser();
-      if (!u.user) return null;
-      const { data } = await supabase.from("profiles").select("*").eq("id", u.user.id).maybeSingle();
+      const user_id = await currentUserId();
+      const { data } = await supabase.from("profiles").select("*").eq("id", user_id).maybeSingle();
       return data as { display_name: string | null; vision_images: string[] | null } | null;
     },
   });
