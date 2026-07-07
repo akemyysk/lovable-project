@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { format, isSameMonth } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
-import { Plus, CalendarClock, PalmtreeIcon, Target } from "lucide-react";
+import { Plus, CalendarClock, TreePalm as PalmtreeIcon, Target } from "lucide-react";
 import { monthRange, toDateKey, toMonthKey } from "@/lib/date-utils";
 import {
   fetchAllTasksBetween, fetchEventsBetween, fetchHabits,
@@ -75,12 +75,12 @@ export function MonthView({ date, onSelectDay }: { date: Date; onSelectDay: (d: 
         </h2>
         <div className="flex gap-2">
           <DayOffDialog rangeStart={monthStartKey} rangeEnd={monthEndKey} trigger={
-            <Button variant="outline" size="sm" className="btn-off">
+            <Button size="sm" className="btn-off">
               <PalmtreeIcon className="h-4 w-4 mr-1" />Folga
             </Button>
           } />
           <EventDialog defaultDate={monthStartKey} trigger={
-            <Button variant="outline" size="sm" className="btn-event">
+            <Button size="sm" className="btn-event">
               <CalendarClock className="h-4 w-4 mr-1" />Compromisso
             </Button>
           } />
@@ -116,7 +116,7 @@ export function MonthView({ date, onSelectDay }: { date: Date; onSelectDay: (d: 
                 className={`text-left min-h-[80px] p-2 rounded-lg border transition-colors ${
                   inMonth ? "bg-background hover:bg-muted/40" : "bg-muted/20 text-muted-foreground"
                 } ${isToday ? "border-primary ring-1 ring-primary/40" : "border-transparent"} ${
-                  isOff ? "bg-sky/40" : ""
+                  isOff ? "bg-[hsl(150_60%_90%)] dark:bg-[hsl(150_60%_45%_/_0.25)]" : ""
                 }`}>
                 <div className="flex items-center justify-between">
                   <span className={`text-sm ${isToday ? "font-semibold text-primary" : ""}`}>{format(d, "d")}</span>

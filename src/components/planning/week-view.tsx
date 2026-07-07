@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
-import { Plus, CalendarClock, PalmtreeIcon } from "lucide-react";
+import { Plus, CalendarClock, TreePalm as PalmtreeIcon } from "lucide-react";
 import { toDateKey, weekRange, toWeekKey } from "@/lib/date-utils";
 import {
   fetchAllTasksBetween, fetchEventsBetween, fetchHabits,
@@ -69,12 +69,12 @@ export function WeekView({ date }: { date: Date }) {
         </h2>
         <div className="flex gap-2">
           <DayOffDialog rangeStart={startKey} rangeEnd={endKey} trigger={
-            <Button variant="outline" size="sm" className="btn-off">
+            <Button size="sm" className="btn-off">
               <PalmtreeIcon className="h-4 w-4 mr-1" />Folga
             </Button>
           } />
           <EventDialog defaultDate={startKey} trigger={
-            <Button variant="outline" size="sm" className="btn-event">
+            <Button size="sm" className="btn-event">
               <CalendarClock className="h-4 w-4 mr-1" />Compromisso
             </Button>
           } />
@@ -99,7 +99,7 @@ export function WeekView({ date }: { date: Date }) {
           const isToday = k === toDateKey(new Date());
           const isOff = offSet.has(k);
           return (
-            <Card key={k} className={`p-3 card-surface min-h-[160px] ${isToday ? "ring-2 ring-primary/40" : ""} ${isOff ? "bg-sky/40" : ""}`}>
+            <Card key={k} className={`p-3 card-surface min-h-[160px] ${isToday ? "ring-2 ring-primary/40" : ""} ${isOff ? "bg-[hsl(150_60%_90%)] dark:bg-[hsl(150_60%_45%_/_0.25)]" : ""}`}>
               <div className="mb-2">
                 <p className="text-xs uppercase text-muted-foreground">{format(d, "EEE", { locale: ptBR })}</p>
                 <p className="font-display text-lg">{format(d, "d")}</p>

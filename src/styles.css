@@ -209,7 +209,12 @@
 @utility text-task {
   color: hsl(224 85% 40%);
 }
-.dark .text-task { color: hsl(214 100% 88%); }
+.dark .text-task { color: hsl(190 90% 70%); }
+
+@utility border-task {
+  border-color: hsl(224 85% 40%);
+}
+.dark .border-task { border-color: hsl(190 90% 70%); }
 
 @utility text-event {
   color: hsl(0 78% 45%);
@@ -217,7 +222,7 @@
 .dark .text-event { color: hsl(0 95% 82%); }
 
 @utility text-off {
-  color: hsl(210 80% 40%);
+  color: hsl(150 60% 35%);
 }
 .dark .text-off { color: hsl(150 70% 78%); }
 
@@ -231,7 +236,7 @@
 @utility btn-habit {
   background-color: hsl(175 70% 42%);
   color: white;
-  border: 1px solid hsl(175 70% 42%);
+  border: 1px solid white;
   &:hover { background-color: hsl(175 70% 38%); color: white; }
 }
 .dark .btn-habit {
@@ -257,7 +262,7 @@
 @utility btn-task {
   background-color: hsl(224 85% 45%);
   color: white;
-  border: 1px solid hsl(224 85% 45%);
+  border: 1px solid white;
   &:hover { background-color: hsl(224 85% 40%); color: white; }
 }
 .dark .btn-task {
@@ -270,7 +275,7 @@
 @utility btn-event {
   background-color: hsl(0 78% 50%);
   color: white;
-  border: 1px solid hsl(0 78% 50%);
+  border: 1px solid white;
   &:hover { background-color: hsl(0 78% 45%); color: white; }
 }
 .dark .btn-event {
@@ -296,7 +301,7 @@
 @utility btn-off {
   background-color: hsl(150 60% 45%);
   color: white;
-  border: 1px solid hsl(150 60% 45%);
+  border: 1px solid white;
   &:hover { background-color: hsl(150 60% 40%); color: white; }
 }
 .dark .btn-off {

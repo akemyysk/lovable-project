@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
-import { Sun, Cloud, Moon, Plus, CalendarClock, Repeat, Pin } from "lucide-react";
+import { Sun, Cloud, Moon, Plus, CalendarClock, Repeat, Pin, Check } from "lucide-react";
 import { toDateKey, relativeDayLabel } from "@/lib/date-utils";
 import { fetchTasksByDate, fetchEventsBetween, type Event as EventRow } from "@/lib/queries";
+import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TaskItem } from "./task-item";
@@ -22,22 +23,51 @@ const PERIODS = [
 type EventWithPeriod = EventRow & { period?: string | null };
 
 function EventItem({ event }: { event: EventWithPeriod }) {
-  return (
-    <EventDialog event={event} trigger={
-      <button className="w-full text-left flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-muted/50 transition-colors">
-        <span className="h-3 w-3 shrink-0 rounded-full bg-[hsl(0_78%_50%)]" />
+  const qc = useQueryClient();
+  const isDone = (event as { completed?: boolean }).completed === true;
 
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-event truncate">{event.title}</p>
+  const toggle = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase
+        .from("events")
+        .update({ completed: !isDone } as never)
+        .eq("id", event.id);
+      if (error) throw error;
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["events"] }),
+  });
+
+  return (
+    <div className="w-full text-left flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-muted/50 transition-colors group">
+      <button
+        type="button"
+        onClick={() => toggle.mutate()}
+        className="shrink-0"
+        aria-label="Alternar conclusão do compromisso"
+      >
+        {isDone ? (
+          <span className="h-4 w-4 rounded-sm bg-[hsl(0_78%_50%)] text-white grid place-items-center">
+            <Check className="h-3 w-3" />
+          </span>
+        ) : (
+          <span className="h-4 w-4 rounded-sm border-2 border-[hsl(0_78%_50%)]/60 block" />
+        )}
+      </button>
+      <EventDialog event={event} trigger={
+        <button className="flex-1 min-w-0 text-left">
+          <span className="h-3 w-3 shrink-0 rounded-full bg-[hsl(0_78%_50%)] inline-block mr-2 align-middle" />
+          <span className={`text-sm font-medium text-event align-middle ${isDone ? "line-through text-muted-foreground" : ""}`}>
+            {event.title}
+          </span>
           {(event.start_time || event.location) && (
             <p className="text-xs text-muted-foreground truncate">
               {event.start_time ? `🕒 ${event.start_time.slice(0,5)}${event.end_time ? " – " + event.end_time.slice(0,5) : ""}` : ""}
               {event.location ? (event.start_time ? " · " : "") + event.location : ""}
             </p>
           )}
-        </div>
-      </button>
-    } />
+        </button>
+      } />
+    </div>
   );
 }
 
@@ -66,12 +96,12 @@ export function DayView({ date }: { date: Date }) {
         </div>
         <div className="flex flex-wrap gap-2">
           <EventDialog defaultDate={key} trigger={
-            <Button variant="outline" size="sm" className="btn-event">
+            <Button size="sm" className="btn-event">
               <CalendarClock className="h-4 w-4 mr-1" />Compromisso
             </Button>
           } />
           <HabitDialog trigger={
-            <Button variant="outline" size="sm" className="btn-habit">
+            <Button size="sm" className="btn-habit">
               <Repeat className="h-4 w-4 mr-1" />Hábito
             </Button>
           } />
@@ -116,9 +146,9 @@ export function DayView({ date }: { date: Date }) {
         })}
       </div>
 
-      <Card className="card-surface p-4">
+      <Card className="card-surface p-4 border-t-2 border-task">
         <div className="flex items-center gap-2 mb-3">
-          <Pin className="h-4 w-4 text-primary" />
+          <Pin className="h-4 w-4 text-task" />
           <h3 className="font-medium">Sem período definido</h3>
         </div>
         <div className="space-y-1">

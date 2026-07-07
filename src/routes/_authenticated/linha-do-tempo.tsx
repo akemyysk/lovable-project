@@ -299,11 +299,15 @@ function YearView({
 
   useEffect(() => setRetrospective(summary?.retrospective ?? ""), [summary?.id]);
 
+  useEffect(() => { setIdx(0); }, [year]);
+
   useEffect(() => {
     if (photos.length < 2) return;
     const t = setInterval(() => setIdx((i) => (i + 1) % photos.length), 3500);
     return () => clearInterval(t);
   }, [photos.length]);
+
+  const safeIdx = photos.length > 0 ? idx % photos.length : 0;
 
   const habitsDone = months.reduce((s, m) => s + m.habits_done, 0);
   const habitsTotal = months.reduce((s, m) => s + m.habits_total, 0);
@@ -336,13 +340,13 @@ function YearView({
         <div className="relative w-full h-64 rounded-xl overflow-hidden bg-muted">
           {photos.map((p, i) => (
             <img key={i} src={p} alt={`Momento ${i + 1}`}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`} />
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === safeIdx ? "opacity-100" : "opacity-0"}`} />
           ))}
           {photos.length > 1 && (
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
               {photos.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)}
-                  className={`h-1.5 w-1.5 rounded-full ${i === idx ? "bg-white" : "bg-white/50"}`} />
+                  className={`h-1.5 w-1.5 rounded-full ${i === safeIdx ? "bg-white" : "bg-white/50"}`} />
               ))}
             </div>
           )}
