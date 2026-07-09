@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
@@ -14,9 +15,9 @@ import { DayHabits } from "./day-habits";
 import { HabitDialog } from "@/components/habits/habit-dialog";
 
 const PERIODS = [
-  { key: "morning", label: "Manhã", icon: Sun, accent: "hsl(48 90% 55%)" },
-  { key: "afternoon", label: "Tarde", icon: Cloud, accent: "hsl(200 85% 55%)" },
-  { key: "evening", label: "Noite", icon: Moon, accent: "hsl(270 55% 60%)" },
+  { key: "morning", label: "Manhã", icon: Sun, accent: "hsl(48 90% 55%)", darkAccent: "hsl(165 70% 45%)" },
+  { key: "afternoon", label: "Tarde", icon: Cloud, accent: "hsl(200 85% 55%)", darkAccent: "hsl(165 70% 45%)" },
+  { key: "evening", label: "Noite", icon: Moon, accent: "hsl(270 55% 60%)", darkAccent: "hsl(165 70% 45%)" },
 ] as const;
 
 
@@ -115,15 +116,15 @@ export function DayView({ date }: { date: Date }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {PERIODS.map(({ key: pk, label, icon: Icon, accent }) => {
+        {PERIODS.map(({ key: pk, label, icon: Icon, accent, darkAccent }) => {
           const periodTasks = tasksByPeriod(pk);
           const periodEvents = eventsByPeriod(pk);
           const isEmpty = periodTasks.length === 0 && periodEvents.length === 0;
           return (
-            <Card key={pk} className="card-surface p-4" style={{ borderTop: `3px solid ${accent}` }}>
+            <Card key={pk} className="card-surface p-4 period-band" style={{ "--band": accent, "--band-dark": darkAccent } as CSSProperties}>
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <Icon className="h-4 w-4" style={{ color: accent }} />
+                  <Icon className="h-4 w-4 period-icon" />
                   <h3 className="font-medium">{label}</h3>
                 </div>
 
@@ -146,9 +147,9 @@ export function DayView({ date }: { date: Date }) {
         })}
       </div>
 
-      <Card className="card-surface p-4 border-t-2 border-task">
+      <Card className="card-surface p-4 period-band" style={{ "--band": "hsl(224 85% 35%)", "--band-dark": "hsl(165 70% 45%)" } as CSSProperties}>
         <div className="flex items-center gap-2 mb-3">
-          <Pin className="h-4 w-4 text-task" />
+          <Pin className="h-4 w-4 period-icon" />
           <h3 className="font-medium">Sem período definido</h3>
         </div>
         <div className="space-y-1">

@@ -103,7 +103,7 @@ export function WeekView({ date }: { date: Date }) {
               <div className="mb-2">
                 <p className="text-xs uppercase text-muted-foreground">{format(d, "EEE", { locale: ptBR })}</p>
                 <p className="font-display text-lg">{format(d, "d")}</p>
-                {isOff && <p className="text-[10px] uppercase text-off font-medium">Folga</p>}
+                {isOff && <p className="text-[10px] uppercase text-off font-bold">Folga</p>}
               </div>
               <div className="space-y-1">
                 {dEvents.map((e) => (

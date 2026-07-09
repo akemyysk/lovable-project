@@ -254,10 +254,15 @@ function MonthCard({ summary }: { summary: MonthSummary }) {
           </Button>
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-        <Stat label="Conclusão" value={`${summary.habits_done}/${summary.habits_total} (${summary.completion_pct}%)`} />
-        <Stat label="Momentos" value={String(summary.moments_count)} />
-        <Stat label="Metas" value={String(summary.goals_done)} />
+      <div className="space-y-3">
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <Stat label="Conclusão" value={`${summary.habits_done}/${summary.habits_total}`} />
+          <Stat label="Porcentagem" value={`${summary.completion_pct}%`} />
+        </div>
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <Stat label="Momentos" value={String(summary.moments_count)} />
+          <Stat label="Metas" value={String(summary.goals_done)} />
+        </div>
       </div>
       {(summary.photos ?? []).length > 0 && (
         <div className="flex flex-wrap gap-2">
