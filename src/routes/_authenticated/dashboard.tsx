@@ -56,7 +56,7 @@ function Dashboard() {
   const goalsPct = goalsTotal ? Math.round((goalsDone / goalsTotal) * 100) : 0;
   const dayProgress = goalsPct;
 
-  const displayName = profile?.display_name ?? "por aí";
+  const displayName = profile?.display_name ?? "Akemy";
   const visionImages = profile?.vision_images ?? [];
 
   const fileRef = useRef<HTMLInputElement>(null);

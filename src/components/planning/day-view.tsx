@@ -15,9 +15,9 @@ import { DayHabits } from "./day-habits";
 import { HabitDialog } from "@/components/habits/habit-dialog";
 
 const PERIODS = [
-  { key: "morning", label: "Manhã", icon: Sun, accent: "hsl(48 90% 55%)", darkAccent: "hsl(178 70% 45%)" },
-  { key: "afternoon", label: "Tarde", icon: Cloud, accent: "hsl(200 85% 55%)", darkAccent: "hsl(178 70% 45%)" },
-  { key: "evening", label: "Noite", icon: Moon, accent: "hsl(270 55% 60%)", darkAccent: "hsl(178 70% 45%)" },
+  { key: "morning", label: "Manhã", icon: Sun, accent: "hsl(48 90% 55%)", darkAccent: "hsl(270 55% 60%)" },
+  { key: "afternoon", label: "Tarde", icon: Cloud, accent: "hsl(200 85% 55%)", darkAccent: "hsl(270 55% 60%)" },
+  { key: "evening", label: "Noite", icon: Moon, accent: "hsl(270 55% 60%)", darkAccent: "hsl(270 55% 60%)" },
 ] as const;
 
 
@@ -147,7 +147,7 @@ export function DayView({ date }: { date: Date }) {
         })}
       </div>
 
-      <Card className="card-surface p-4 period-band" style={{ "--band": "hsl(224 85% 35%)", "--band-dark": "hsl(178 70% 45%)" } as CSSProperties}>
+      <Card className="card-surface p-4 period-band" style={{ "--band": "hsl(224 85% 35%)", "--band-dark": "hsl(270 55% 60%)" } as CSSProperties}>
         <div className="flex items-center gap-2 mb-3">
           <Pin className="h-4 w-4 period-icon" />
           <h3 className="font-medium">Sem período definido</h3>

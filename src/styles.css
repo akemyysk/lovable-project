@@ -85,9 +85,9 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.03 250);
 
-  /* Verde água — cor principal do modo claro */
-  --primary: oklch(0.65 0.13 178);
-  --primary-foreground: oklch(0.99 0.01 178);
+  /* Azul esverdeado (#008080) — cor principal do modo claro */
+  --primary: oklch(0.52 0.10 190);
+  --primary-foreground: oklch(0.99 0.01 190);
 
   --secondary: oklch(0.965 0.008 240);
   --secondary-foreground: oklch(0.3 0.04 250);
@@ -103,35 +103,35 @@
 
   --border: oklch(0.9 0.01 245);
   --input: oklch(0.94 0.008 240);
-  --ring: oklch(0.65 0.13 178);
+  --ring: oklch(0.52 0.10 190);
 
 
   /* Folgas: azul médio no modo claro; verde médio no modo escuro (ver .dark). */
-  --sage: oklch(0.86 0.08 178);
-  --sage-foreground: oklch(0.32 0.1 178);
+  --sage: oklch(0.86 0.08 190);
+  --sage-foreground: oklch(0.32 0.1 190);
   --lilac: oklch(0.86 0.06 300);
   --lilac-foreground: oklch(0.32 0.1 295);
-  --sky: oklch(0.7 0.12 178);
-  --sky-foreground: oklch(0.22 0.1 178);
-  --success: oklch(0.68 0.13 178);
-  --success-foreground: oklch(0.98 0.01 178);
+  --sky: oklch(0.7 0.12 190);
+  --sky-foreground: oklch(0.22 0.1 190);
+  --success: oklch(0.68 0.13 190);
+  --success-foreground: oklch(0.98 0.01 190);
   --warning: oklch(0.82 0.12 80);
   --warning-foreground: oklch(0.3 0.08 60);
 
   --chart-1: oklch(0.55 0.1 245);
-  --chart-2: oklch(0.7 0.09 178);
+  --chart-2: oklch(0.7 0.09 190);
   --chart-3: oklch(0.72 0.08 300);
   --chart-4: oklch(0.78 0.1 210);
   --chart-5: oklch(0.65 0.12 30);
 
   --sidebar: oklch(0.985 0.005 240);
   --sidebar-foreground: oklch(0.3 0.03 250);
-  --sidebar-primary: oklch(0.65 0.1 178);
+  --sidebar-primary: oklch(0.52 0.10 190);
   --sidebar-primary-foreground: oklch(0.985 0.003 240);
-  --sidebar-accent: oklch(0.95 0.03 178);
-  --sidebar-accent-foreground: oklch(0.3 0.08 178);
-  --sidebar-border: oklch(0.93 0.02 178);
-  --sidebar-ring: oklch(0.6 0.1 178);
+  --sidebar-accent: oklch(0.95 0.03 190);
+  --sidebar-accent-foreground: oklch(0.3 0.08 190);
+  --sidebar-border: oklch(0.93 0.02 190);
+  --sidebar-ring: oklch(0.52 0.10 190);
 }
 
 .dark {
@@ -141,7 +141,7 @@
   --card-foreground: oklch(0.96 0.005 240);
   --popover: oklch(0.23 0.025 250);
   --popover-foreground: oklch(0.96 0.005 240);
-  --primary: oklch(0.72 0.13 178);
+  --primary: oklch(0.62 0.10 190);
   --primary-foreground: oklch(0.22 0.05 250);
 
   --secondary: oklch(0.28 0.025 250);
@@ -154,30 +154,30 @@
   --destructive-foreground: oklch(0.98 0.005 240);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.7 0.1 178);
-  --sage: oklch(0.5 0.06 178);
-  --sage-foreground: oklch(0.96 0.02 178);
+  --ring: oklch(0.62 0.10 190);
+  --sage: oklch(0.5 0.06 190);
+  --sage-foreground: oklch(0.96 0.02 190);
   --lilac: oklch(0.5 0.07 300);
   --lilac-foreground: oklch(0.96 0.02 300);
-  --sky: oklch(0.5 0.12 178);
-  --sky-foreground: oklch(0.96 0.02 178);
-  --success: oklch(0.7 0.13 178);
-  --success-foreground: oklch(0.15 0.05 178);
+  --sky: oklch(0.5 0.12 190);
+  --sky-foreground: oklch(0.96 0.02 190);
+  --success: oklch(0.7 0.13 190);
+  --success-foreground: oklch(0.15 0.05 190);
   --warning: oklch(0.75 0.13 80);
   --warning-foreground: oklch(0.2 0.05 60);
   --chart-1: oklch(0.65 0.14 245);
-  --chart-2: oklch(0.72 0.1 178);
+  --chart-2: oklch(0.72 0.1 190);
   --chart-3: oklch(0.72 0.1 300);
   --chart-4: oklch(0.78 0.11 210);
   --chart-5: oklch(0.68 0.14 30);
   --sidebar: oklch(0.22 0.02 250);
   --sidebar-foreground: oklch(0.96 0.005 240);
-  --sidebar-primary: oklch(0.72 0.1 178);
+  --sidebar-primary: oklch(0.62 0.10 190);
   --sidebar-primary-foreground: oklch(0.22 0.05 250);
   --sidebar-accent: oklch(0.28 0.025 250);
   --sidebar-accent-foreground: oklch(0.96 0.005 240);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.7 0.1 178);
+  --sidebar-ring: oklch(0.62 0.10 190);
 }
 
 @layer base {
@@ -209,12 +209,12 @@
 @utility text-task {
   color: hsl(224 85% 40%);
 }
-.dark .text-task { color: hsl(186 90% 60%); }
+.dark .text-task { color: hsl(180 85% 55%); }
 
 @utility border-task {
   border-color: hsl(224 85% 40%);
 }
-.dark .border-task { border-color: hsl(186 90% 60%); }
+.dark .border-task { border-color: hsl(180 85% 55%); }
 
 @utility text-event {
   color: hsl(0 78% 45%);
@@ -232,12 +232,12 @@
 }
 .dark .text-habit { color: hsl(0 0% 100%); }
 
-/* Botões coloridos — preenchidos no modo claro, contorno no modo escuro */
+/* Botões coloridos — contorno no modo claro, contorno no modo escuro */
 @utility btn-habit {
-  background-color: hsl(175 70% 42%) !important;
-  color: white !important;
-  border: 1px solid white !important;
-  &:hover { background-color: hsl(175 70% 38%) !important; color: white !important; }
+  background-color: var(--background) !important;
+  color: hsl(175 70% 35%) !important;
+  border: 1px solid hsl(175 70% 42%) !important;
+  &:hover { background-color: hsl(175 70% 95%) !important; color: hsl(175 70% 30%) !important; }
 }
 .dark .btn-habit {
   background-color: transparent !important;
@@ -247,10 +247,10 @@
 .dark .btn-habit:hover { background-color: hsl(175 70% 45% / 0.15) !important; }
 
 @utility btn-habit-outline {
-  background-color: hsl(175 70% 42%) !important;
-  color: white !important;
+  background-color: var(--background) !important;
+  color: hsl(175 70% 35%) !important;
   border-color: hsl(175 70% 42%) !important;
-  &:hover { background-color: hsl(175 70% 38%) !important; color: white !important; }
+  &:hover { background-color: hsl(175 70% 95%) !important; color: hsl(175 70% 30%) !important; }
 }
 .dark .btn-habit-outline {
   background-color: transparent !important;
@@ -260,23 +260,23 @@
 .dark .btn-habit-outline:hover { background-color: hsl(175 70% 45% / 0.15) !important; color: hsl(175 80% 78%); }
 
 @utility btn-task {
-  background-color: hsl(224 85% 45%) !important;
-  color: white !important;
-  border: 1px solid white !important;
-  &:hover { background-color: hsl(224 85% 40%) !important; color: white !important; }
+  background-color: var(--background) !important;
+  color: hsl(224 85% 40%) !important;
+  border: 1px solid hsl(224 85% 45%) !important;
+  &:hover { background-color: hsl(224 85% 95%) !important; color: hsl(224 85% 35%) !important; }
 }
 .dark .btn-task {
   background-color: transparent !important;
-  color: hsl(214 100% 82%) !important;
-  border-color: hsl(214 90% 65%) !important;
+  color: hsl(186 90% 60%) !important;
+  border-color: hsl(186 80% 50%) !important;
 }
-.dark .btn-task:hover { background-color: hsl(224 85% 55% / 0.15) !important; }
+.dark .btn-task:hover { background-color: hsl(186 80% 50% / 0.15) !important; }
 
 @utility btn-event {
-  background-color: hsl(0 78% 50%) !important;
-  color: white !important;
-  border: 1px solid white !important;
-  &:hover { background-color: hsl(0 78% 45%) !important; color: white !important; }
+  background-color: var(--background) !important;
+  color: hsl(0 78% 45%) !important;
+  border: 1px solid hsl(0 78% 50%) !important;
+  &:hover { background-color: hsl(0 78% 96%) !important; color: hsl(0 78% 40%) !important; }
 }
 .dark .btn-event {
   background-color: transparent !important;
@@ -286,10 +286,10 @@
 .dark .btn-event:hover { background-color: hsl(0 78% 55% / 0.15) !important; }
 
 @utility btn-event-outline {
-  background-color: hsl(0 78% 50%) !important;
-  color: white !important;
+  background-color: var(--background) !important;
+  color: hsl(0 78% 45%) !important;
   border-color: hsl(0 78% 50%) !important;
-  &:hover { background-color: hsl(0 78% 45%) !important; color: white !important; }
+  &:hover { background-color: hsl(0 78% 96%) !important; color: hsl(0 78% 40%) !important; }
 }
 .dark .btn-event-outline {
   background-color: transparent !important;
@@ -299,10 +299,10 @@
 .dark .btn-event-outline:hover { background-color: hsl(0 78% 55% / 0.15) !important; color: hsl(0 90% 82%); }
 
 @utility btn-off {
-  background-color: hsl(150 60% 45%) !important;
-  color: white !important;
-  border: 1px solid white !important;
-  &:hover { background-color: hsl(150 60% 40%) !important; color: white !important; }
+  background-color: var(--background) !important;
+  color: hsl(150 60% 35%) !important;
+  border: 1px solid hsl(150 60% 45%) !important;
+  &:hover { background-color: hsl(150 60% 95%) !important; color: hsl(150 60% 30%) !important; }
 }
 .dark .btn-off {
   background-color: transparent !important;
@@ -312,10 +312,10 @@
 .dark .btn-off:hover { background-color: hsl(150 60% 55% / 0.15) !important; }
 
 @utility btn-off-outline {
-  background-color: hsl(150 60% 45%) !important;
-  color: white !important;
+  background-color: var(--background) !important;
+  color: hsl(150 60% 35%) !important;
   border-color: hsl(150 60% 45%) !important;
-  &:hover { background-color: hsl(150 60% 40%) !important; color: white !important; }
+  &:hover { background-color: hsl(150 60% 95%) !important; color: hsl(150 60% 30%) !important; }
 }
 .dark .btn-off-outline {
   background-color: transparent !important;
